@@ -7,7 +7,14 @@ function PlanetsListItem(props) {
 
   console.log("Planet", planet);
 
-  return <li>{planet.name} - First Film {firstFilm}</li>;
+  useState(() => {
+    const url = planet.films[0]
+    fetch(url)
+    .then(res => res.json())
+    .then(setFirstFilm)
+  }, [planet])
+
+  return <li>{planet.name} - First Film {firstFilm.title}</li>;
 }
 
 export default PlanetsListItem;
